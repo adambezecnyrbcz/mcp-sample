@@ -34,6 +34,7 @@ async function executeTool(
     name: string,
     args: Record<string, unknown>
 ): Promise<unknown> {
+    console.log('executeTool called with name ' + name);
     switch (name) {
         case "get_weather": {
             // In real life, call a weather API here
