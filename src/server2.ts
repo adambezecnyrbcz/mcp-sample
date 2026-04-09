@@ -3,6 +3,10 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
 
+/*
+* @see https://modelcontextprotocol.io/docs/develop/build-server#typescript
+* */
+
 // ── Server factory ────────────────────────────────────────────────
 // A new McpServer instance is created per request (stateless mode —
 // no session state is shared between requests).
@@ -55,8 +59,9 @@ const httpServer = http.createServer(async (req, res) => {
         return;
     }
 
-    // Stateless mode: omitting sessionIdGenerator disables session management
-    const transport = new StreamableHTTPServerTransport();
+    // Stateless mode: omitting sessionIdGenerator disables session management.
+    // enableJsonResponse returns plain JSON instead of SSE, which is simpler for testing with curl.
+    const transport = new StreamableHTTPServerTransport({ enableJsonResponse: true });
     const server = createMcpServer();
     await server.connect(transport);
     await transport.handleRequest(req, res);
