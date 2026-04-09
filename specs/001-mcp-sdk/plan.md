@@ -81,3 +81,4 @@ is still far less code than the current manual approach (~20 lines vs. current ~
 2. **Create `src/server2.ts`** — new file with the SDK-based implementation shown above; `src/index.ts` remains unchanged
 3. **Use HTTP as server transport**: wrap `StreamableHttpServerTransport` in a tiny native http handler
 4. **Update `package.json`** — add `zod` as a runtime dependency; add a `start2` script pointing to `dist/server2.js`
+5. **Update `package.json`** — change  `start` script pointing to `dist/server.js`. Rename src/index.ts to src/server.ts. Change all existing references to `src/index.ts` to `src/server.ts`
